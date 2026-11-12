@@ -1,10 +1,10 @@
-import { prisma } from './prisma.ts';
-import { createClient } from '../utils/supabase/server.ts';
+import { prisma } from './prisma';
+import { createClient } from '../utils/supabase/server';
 import {
   DEMO_USER_EMAIL,
   DEMO_USER_ID,
   DEMO_WORKSPACE_ID,
-} from './workspace-constants.ts';
+} from './workspace-constants';
 
 export { DEMO_USER_EMAIL, DEMO_USER_ID, DEMO_WORKSPACE_ID };
 

@@ -1,5 +1,5 @@
 import type { IncomingMessage, ServerResponse } from 'node:http';
-import { apiHandler } from '../src/server/api.ts';
+import { apiHandler } from '../src/server/api';
 
 export default async function handler(req: IncomingMessage, res: ServerResponse): Promise<void> {
   if (req.url && !req.url.startsWith('/api/')) {

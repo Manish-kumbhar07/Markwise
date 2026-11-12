@@ -2,14 +2,14 @@ import { Buffer } from 'node:buffer';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import { GoogleGenAI } from '@google/genai';
 import { createClient as createSupabaseClient } from '@supabase/supabase-js';
-import { prisma } from '../lib/prisma.ts';
+import { prisma } from '../lib/prisma';
 import {
   DEMO_USER_ID,
   DEMO_WORKSPACE_ID,
   getOrCreateDemoWorkspace,
   getOrCreateUserWorkspace,
   checkRateLimit,
-} from '../lib/workspace.ts';
+} from '../lib/workspace';
 
 class InvalidRequestError extends Error {}
 

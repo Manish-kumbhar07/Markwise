@@ -1,38 +1,27 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "experimentalDecorators": true,
-    "useDefineForClassFields": false,
-    "module": "ESNext",
-    "types": ["vite/client"],
-    "lib": [
-      "ES2022",
-      "DOM",
-      "DOM.Iterable"
-    ],
-    "skipLibCheck": true,
-    "moduleResolution": "bundler",
-    "isolatedModules": true,
-    "moduleDetection": "force",
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
-    "jsx": "react-jsx",
+    "skipLibCheck": true,
+    "strict": false,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
     "paths": {
-      "@/*": [
-        "./src/*",
-        "./*"
-      ],
-      "next/navigation": [
-        "./src/lib/next-navigation.ts"
-      ],
-      "next/headers": [
-        "./src/lib/next-headers.ts"
-      ],
-      "next/cache": [
-        "./src/lib/next-cache.ts"
-      ]
-    },
-    "allowImportingTsExtensions": true,
-    "noEmit": true
+      "@/*": ["./src/*"]
+    }
   },
-  "exclude": ["dist"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
 }
