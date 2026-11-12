@@ -19,13 +19,17 @@ import {
   getSeverityBorderClass,
   getSeverityBadgeColors,
 } from '../../utils/dashboard';
-import { getRules, createRule, deleteRule } from '../../actions/rules';
+import { getRules, createRule, deleteRule } from '@/app/actions/rules';
 import { Skeleton } from '../ui/skeleton';
 import { SeverityIndicator } from './SeverityIndicator';
 
-export function BrandBrainPage() {
-  const [rules, setRules] = useState<RuleCard[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+interface BrandBrainPageProps {
+  initialRules?: RuleCard[];
+}
+
+export function BrandBrainPage({ initialRules }: BrandBrainPageProps = {}) {
+  const [rules, setRules] = useState<RuleCard[]>(initialRules || []);
+  const [isLoading, setIsLoading] = useState(!initialRules);
   const [loadError, setLoadError] = useState<string | null>(null);
 
   // Form State
@@ -64,13 +68,17 @@ export function BrandBrainPage() {
         if (mounted) setIsLoading(false);
       }
     }
-    loadData();
+
+    if (!initialRules) {
+      loadData();
+    }
+
     window.addEventListener('workspace-changed', loadData);
     return () => {
       mounted = false;
       window.removeEventListener('workspace-changed', loadData);
     };
-  }, []);
+  }, [initialRules]);
 
   const handleCreateRule = async (e: React.FormEvent) => {
     e.preventDefault();

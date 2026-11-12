@@ -16,8 +16,8 @@ import {
   DialogDescription,
   DialogFooter,
 } from '@/components/ui/dialog';
-import { createRuleFromIssue } from '@/actions/rules';
-import type { ReviewIssueResult } from '@/actions/review';
+import { createRuleFromIssue } from '@/app/actions/rules';
+import type { ReviewIssueResult } from '@/app/actions/review';
 import { SeverityIndicator } from './dashboard/SeverityIndicator';
 
 interface IssueCardProps {
