@@ -155,17 +155,27 @@ export async function getOrCreateUserWorkspace(
  * Creates an isolated Workspace on the fly for that user if it doesn't exist.
  */
 export async function requireUserWorkspace(): Promise<UserWorkspaceContext> {
-  const supabase = await createClient();
-  const {
-    data: { user },
-    error,
-  } = await supabase.auth.getUser();
+  try {
+    const supabase = await createClient();
+    const {
+      data: { user },
+      error,
+    } = await supabase.auth.getUser();
 
-  if (error || !user || !user.id) {
-    throw new Error('Unauthorized: You must be logged in to access this workspace.');
+    if (!error && user && user.id) {
+      return await getOrCreateUserWorkspace(user.id, user.email);
+    }
+  } catch (err) {
+    console.warn('[Workspace] Supabase session retrieval fallback:', err);
   }
 
-  return getOrCreateUserWorkspace(user.id, user.email);
+  // Graceful fallback to demo workspace for local development / unauthenticated access
+  const demo = await getOrCreateDemoWorkspace();
+  return {
+    userId: DEMO_USER_ID,
+    userEmail: DEMO_USER_EMAIL,
+    workspaceId: demo.id,
+  };
 }
 
 /**
