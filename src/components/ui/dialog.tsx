@@ -1,3 +1,5 @@
+'use client';
+
 import * as React from 'react';
 import { X } from 'lucide-react';
 
@@ -100,7 +102,7 @@ export function DialogContent({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-xs animate-in fade-in duration-150"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-150"
       role="dialog"
       aria-modal="true"
     >
@@ -110,13 +112,13 @@ export function DialogContent({
         aria-hidden="true"
       />
       <div
-        className={`relative z-10 bg-[#FFFCF6] border border-[#E8DFD0] rounded-2xl max-w-lg w-full p-6 sm:p-7 shadow-2xl space-y-4 animate-in zoom-in-95 duration-150 ${className}`}
+        className={`relative z-10 bg-[var(--card)] border border-[var(--border)] text-[var(--text)] rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl space-y-4 animate-in zoom-in-95 duration-150 transition-colors ${className}`}
         {...props}
       >
         <button
           type="button"
           onClick={() => onOpenChange(false)}
-          className="absolute top-4 right-4 p-1.5 rounded-lg text-[#7A8274] hover:text-[#242820] hover:bg-[#E8DFD0]/40 transition-colors cursor-pointer"
+          className="absolute top-5 right-5 p-1.5 rounded-xl text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--background)] transition-colors cursor-pointer"
           aria-label="Close dialog"
         >
           <X className="w-4 h-4" />
@@ -133,7 +135,7 @@ export function DialogHeader({
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={`flex flex-col space-y-1.5 text-left border-b border-[#E8DFD0]/70 pb-3 ${className}`}
+      className={`flex flex-col space-y-1.5 text-left border-b border-[var(--border)] pb-4 ${className}`}
       {...props}
     />
   );
@@ -145,7 +147,7 @@ export function DialogFooter({
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={`flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2 pt-3 border-t border-[#E8DFD0]/60 gap-2 ${className}`}
+      className={`flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2 pt-4 border-t border-[var(--border)] gap-2 ${className}`}
       {...props}
     />
   );
@@ -157,7 +159,7 @@ export function DialogTitle({
 }: React.HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h2
-      className={`text-lg font-bold text-[#242820] font-inter leading-none tracking-tight ${className}`}
+      className={`text-lg font-bold text-[var(--text)] font-serif leading-none tracking-tight ${className}`}
       {...props}
     />
   );
@@ -169,9 +171,8 @@ export function DialogDescription({
 }: React.HTMLAttributes<HTMLParagraphElement>) {
   return (
     <p
-      className={`text-xs text-[#545B4E] leading-relaxed ${className}`}
+      className={`text-xs text-[var(--text-muted)] leading-relaxed ${className}`}
       {...props}
     />
   );
 }
-
