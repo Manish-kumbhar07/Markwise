@@ -70,7 +70,7 @@ export default function LoginPage() {
         }
 
         if (data?.user) {
-          router.push('/dashboard/rules');
+          router.push('/dashboard');
         }
       } else {
         const { data, error } = await supabase.auth.signUp({
@@ -86,7 +86,7 @@ export default function LoginPage() {
         }
 
         if (data?.session) {
-          router.push('/dashboard/rules');
+          router.push('/dashboard');
         } else if (data?.user) {
           setSuccessMessage(
             'Account created successfully! Please check your email inbox to confirm your account, or sign in.'

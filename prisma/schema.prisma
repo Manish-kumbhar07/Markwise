@@ -18,27 +18,45 @@ model User {
 }
 
 model Workspace {
-  id       String    @id @default(cuid())
-  name     String
-  users    User[]
-  rules    Rule[]
-  facts    Fact[]
-  contents Content[]
+  id         String    @id @default(cuid())
+  name       String
+  webhookUrl String?
+  users      User[]
+  rules      Rule[]
+  facts      Fact[]
+  contents   Content[]
 }
 
 model Rule {
-  id          String    @id @default(cuid())
-  workspaceId String
-  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
-  title       String
-  severity    String
-  type        String
-  definition  String
-  version     Int       @default(1)
-  createdAt   DateTime  @default(now())
-  issues      Issue[]
+  id             String        @id @default(cuid())
+  workspaceId    String
+  workspace      Workspace     @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  title          String
+  severity       String
+  type           String
+  definition     String
+  version        Int           @default(1)
+  currentVersion Int           @default(1)
+  createdAt      DateTime      @default(now())
+  issues         Issue[]
+  versions       RuleVersion[]
 
   @@index([workspaceId])
+}
+
+model RuleVersion {
+  id           String   @id @default(cuid())
+  ruleId       String
+  rule         Rule     @relation(fields: [ruleId], references: [id], onDelete: Cascade)
+  version      Int
+  title        String
+  definition   String
+  severity     String
+  createdAt    DateTime @default(now())
+  createdBy    String
+  changeReason String?
+
+  @@index([ruleId])
 }
 
 model Fact {
@@ -48,35 +66,48 @@ model Fact {
   claim          String
   evidenceSource String
   expiryDate     DateTime
-  status         String
+  status         String    @default("ACTIVE")
 
   @@index([workspaceId])
 }
 
 model Content {
-  id          String    @id @default(cuid())
+  id          String       @id @default(cuid())
   workspaceId String
-  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  workspace   Workspace    @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
   title       String
   bodyText    String
   status      String
   issues      Issue[]
+  publishLogs PublishLog[]
 
   @@index([workspaceId])
 }
 
 model Issue {
-  id          String   @id @default(cuid())
-  contentId   String
-  content     Content  @relation(fields: [contentId], references: [id], onDelete: Cascade)
-  ruleId      String?
-  rule        Rule?    @relation(fields: [ruleId], references: [id], onDelete: SetNull)
-  severity    String
-  explanation String
-  suggestedFix String
-  status      String   @default("OPEN")
-  aiAssisted  Boolean  @default(true)
+  id             String   @id @default(cuid())
+  contentId      String
+  content        Content  @relation(fields: [contentId], references: [id], onDelete: Cascade)
+  ruleId         String?
+  rule           Rule?    @relation(fields: [ruleId], references: [id], onDelete: SetNull)
+  severity       String
+  explanation    String
+  suggestedFix   String
+  status         String   @default("OPEN")
+  aiAssisted     Boolean  @default(true)
+  overrideReason String?
 
   @@index([contentId])
   @@index([ruleId])
+}
+
+model PublishLog {
+  id        String   @id @default(cuid())
+  contentId String
+  content   Content  @relation(fields: [contentId], references: [id], onDelete: Cascade)
+  status    String
+  response  String
+  createdAt DateTime @default(now())
+
+  @@index([contentId])
 }

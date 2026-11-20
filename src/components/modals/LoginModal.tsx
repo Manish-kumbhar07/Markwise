@@ -48,7 +48,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
 
         if (data.user) {
           onClose();
-          router.push('/dashboard/rules');
+          router.push('/dashboard');
         }
       } else {
         const { data, error } = await supabase.auth.signUp({
@@ -64,7 +64,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
 
         if (data.session) {
           onClose();
-          router.push('/dashboard/rules');
+          router.push('/dashboard');
         } else if (data.user) {
           setSuccessMessage(
             'Account created successfully! Please check your email to confirm your account, or sign in.'

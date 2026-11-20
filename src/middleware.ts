@@ -47,15 +47,16 @@ export async function middleware(request: NextRequest) {
   const url = new URL(request.url);
   const pathname = url.pathname;
 
-  // 1. Unauthenticated user trying to access /dashboard or any sub-route -> redirect to /login
-  if (!user && (pathname === '/dashboard' || pathname.startsWith('/dashboard/'))) {
+  // 1. Unauthenticated user trying to access protected dashboard sub-routes -> redirect to /login
+  // (/dashboard itself is allowed as a clean placeholder during rebuild)
+  if (!user && pathname.startsWith('/dashboard/')) {
     url.pathname = '/login';
     return NextResponse.redirect(url);
   }
 
-  // 2. Authenticated user trying to access /login or / -> redirect to /dashboard/rules
-  if (user && (pathname === '/login' || pathname === '/')) {
-    url.pathname = '/dashboard/rules';
+  // 2. Authenticated user trying to access /login -> redirect to /dashboard
+  if (user && pathname === '/login') {
+    url.pathname = '/dashboard';
     return NextResponse.redirect(url);
   }
 

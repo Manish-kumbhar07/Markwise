@@ -34,9 +34,9 @@ export default function ErrorPage({ error, reset }: ErrorProps) {
 
   const handleGoDashboard = () => {
     if (typeof window !== 'undefined') {
-      window.location.href = '/dashboard/rules';
+      window.location.href = '/dashboard';
     } else {
-      router.push('/dashboard/rules');
+      router.push('/dashboard');
     }
   };
 
