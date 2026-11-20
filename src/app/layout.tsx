@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { ThemeProvider } from '@/components/ThemeProvider';
-import '../index.css';
+import './globals.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://markwise.ai'),
@@ -53,7 +53,7 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
-        <ThemeProvider>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           {children}
         </ThemeProvider>
       </body>

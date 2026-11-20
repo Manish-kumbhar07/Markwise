@@ -9,6 +9,12 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        background: 'var(--background)',
+        card: 'var(--card)',
+        border: 'var(--border)',
+        text: 'var(--text)',
+        'text-primary': 'var(--text-primary)',
+        'text-muted': 'var(--text-muted)',
         brand: {
           forest: '#123B2F',
           'forest-dark': '#0c2921',
