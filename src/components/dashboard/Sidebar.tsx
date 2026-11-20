@@ -12,6 +12,7 @@ import {
   Settings,
   Shield,
   ArrowLeft,
+  ClipboardCheck,
 } from 'lucide-react';
 
 interface NavItem {
@@ -24,6 +25,7 @@ const navItems: NavItem[] = [
   { name: 'Overview', href: '/dashboard', icon: LayoutDashboard },
   { name: 'Rules', href: '/dashboard/rules', icon: BookOpen },
   { name: 'Review', href: '/dashboard/review', icon: FileCheck2 },
+  { name: 'Approvals', href: '/dashboard/approvals', icon: ClipboardCheck },
   { name: 'Facts', href: '/dashboard/facts', icon: Database },
   { name: 'Settings', href: '/dashboard/settings', icon: Settings },
 ];

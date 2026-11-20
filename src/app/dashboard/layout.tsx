@@ -1,6 +1,7 @@
 import React from 'react';
 import { Sidebar } from '@/components/dashboard/Sidebar';
 import { Header } from '@/components/dashboard/Header';
+import { PageTransition } from '@/components/dashboard/PageTransition';
 
 export default function DashboardLayout({
   children,
@@ -17,7 +18,7 @@ export default function DashboardLayout({
         <Header />
         <main id="main-content" className="flex-1 p-8">
           <div className="max-w-7xl mx-auto">
-            {children}
+            <PageTransition>{children}</PageTransition>
           </div>
         </main>
       </div>
