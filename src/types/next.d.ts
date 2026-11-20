@@ -56,6 +56,7 @@ declare module 'next/navigation' {
   export function useRouter(): AppRouterInstance;
   export function usePathname(): string;
   export function useSearchParams(): URLSearchParams;
+  export function redirect(url: string, type?: unknown): never;
 }
 
 declare module 'next/headers' {

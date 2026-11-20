@@ -40,6 +40,7 @@ export async function middleware(request: NextRequest) {
     },
   });
 
+  // getUser() validates the token against Supabase auth
   const {
     data: { user },
   } = await supabase.auth.getUser();
@@ -47,15 +48,22 @@ export async function middleware(request: NextRequest) {
   const url = new URL(request.url);
   const pathname = url.pathname;
 
-  // 1. Authenticated user trying to access /login -> redirect to /dashboard
+  // 1. If user is NOT logged in and tries to access /dashboard or any subroute -> Redirect to /login
+  if (!user && (pathname === '/dashboard' || pathname.startsWith('/dashboard/'))) {
+    const loginUrl = new URL('/login', request.url);
+    loginUrl.searchParams.set('redirectTo', pathname);
+    return NextResponse.redirect(loginUrl);
+  }
+
+  // 2. If user IS logged in and tries to access /login -> Redirect to /dashboard
   if (user && pathname === '/login') {
-    url.pathname = '/dashboard';
-    return NextResponse.redirect(url);
+    const redirectTo = request.nextUrl.searchParams.get('redirectTo') || '/dashboard';
+    return NextResponse.redirect(new URL(redirectTo, request.url));
   }
 
   return response;
 }
 
 export const config = {
-  matcher: ['/', '/login', '/dashboard', '/dashboard/:path*'],
+  matcher: ['/login', '/dashboard', '/dashboard/:path*'],
 };

@@ -7,7 +7,6 @@ import {
   ApprovalContentItem,
   approveContent,
   rejectContent,
-  resetApprovalQueue,
 } from '@/app/actions/approvals';
 import {
   CheckCircle2,
@@ -91,17 +90,6 @@ export function ApprovalsView({ initialQueue }: ApprovalsViewProps) {
         console.error('Failed to reject content:', err);
       } finally {
         setActiveItemId(null);
-      }
-    });
-  };
-
-  const handleReset = () => {
-    startTransition(async () => {
-      try {
-        await resetApprovalQueue();
-        window.location.reload();
-      } catch (err) {
-        console.error('Failed to reset queue:', err);
       }
     });
   };
@@ -232,14 +220,6 @@ export function ApprovalsView({ initialQueue }: ApprovalsViewProps) {
                   <Sparkles className="w-4 h-4" />
                   Review New Copy
                 </Link>
-                <button
-                  onClick={handleReset}
-                  disabled={isPending}
-                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[var(--card)] border border-[var(--border)] text-xs font-semibold hover:bg-[var(--background)] transition-colors text-[var(--text-muted)] hover:text-[var(--text)]"
-                >
-                  <RefreshCw className={`w-3.5 h-3.5 ${isPending ? 'animate-spin' : ''}`} />
-                  Restore Demo Queue
-                </button>
               </div>
             </motion.div>
           ) : (

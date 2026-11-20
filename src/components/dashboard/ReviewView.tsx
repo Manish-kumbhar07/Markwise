@@ -19,6 +19,7 @@ import {
 import {
   runAIReview,
   saveDraftContent,
+  createDraft,
   type ReviewContentResult,
   type ReviewIssueResult,
 } from '@/app/actions/review';
@@ -27,13 +28,10 @@ interface ReviewViewProps {
   initialContent: ReviewContentResult;
 }
 
-const DEFAULT_SAMPLE_COPY =
-  'Markwise guarantees 100% unbreakable security and absolute zero risk across all cloud deployments. Our revolutionary enterprise architecture is 10x faster than legacy manual review tools with zero latency guarantees under 1ms.';
-
 export function ReviewView({ initialContent }: ReviewViewProps) {
-  const [contentId] = useState(initialContent.id);
-  const [title, setTitle] = useState(initialContent.title || 'Enterprise Cloud Launch Announcement');
-  const [bodyText, setBodyText] = useState(initialContent.bodyText || DEFAULT_SAMPLE_COPY);
+  const [contentId, setContentId] = useState(initialContent.id);
+  const [title, setTitle] = useState(initialContent.title || '');
+  const [bodyText, setBodyText] = useState(initialContent.bodyText || '');
   const [issues, setIssues] = useState<ReviewIssueResult[]>(initialContent.issues || []);
   const [isPending, startTransition] = useTransition();
   const [appliedFixes, setAppliedFixes] = useState<Record<string, boolean>>({});
@@ -43,10 +41,21 @@ export function ReviewView({ initialContent }: ReviewViewProps) {
   const wordCount = bodyText.trim() ? bodyText.trim().split(/\s+/).length : 0;
 
   const handleRunReview = () => {
+    if (!bodyText.trim()) {
+      setStatusMessage('Please enter draft copy in the editor to analyze.');
+      return;
+    }
+
     setStatusMessage(null);
     startTransition(async () => {
       try {
-        const detected = await runAIReview(contentId, bodyText, title);
+        let activeId = contentId;
+        if (!activeId) {
+          const newDraft = await createDraft({ title: title || 'Untitled Review Draft', bodyText });
+          activeId = newDraft.id;
+          setContentId(newDraft.id);
+        }
+        const detected = await runAIReview(activeId, bodyText, title);
         setIssues(detected);
         if (detected.length === 0) {
           setStatusMessage('Clean draft! Zero policy violations detected.');
@@ -88,8 +97,10 @@ export function ReviewView({ initialContent }: ReviewViewProps) {
     saveDraftContent(contentId, updatedText, title).catch(console.error);
   };
 
-  const handleResetSample = () => {
-    setBodyText(DEFAULT_SAMPLE_COPY);
+  const handleClearDraft = () => {
+    setBodyText('');
+    setTitle('');
+    setIssues([]);
     setAppliedFixes({});
     setStatusMessage(null);
   };
@@ -127,12 +138,12 @@ export function ReviewView({ initialContent }: ReviewViewProps) {
         <div className="flex items-center gap-3">
           <button
             type="button"
-            onClick={handleResetSample}
+            onClick={handleClearDraft}
             className="px-3.5 py-2 rounded-xl border border-[var(--border)] bg-[var(--card)] hover:bg-[var(--background)] text-xs font-semibold text-[var(--text)] transition-colors flex items-center gap-1.5 cursor-pointer shadow-2xs"
-            title="Reset to sample violating copy"
+            title="Clear draft text and issues"
           >
             <RotateCcw className="w-3.5 h-3.5" />
-            <span>Reset Sample</span>
+            <span>Clear</span>
           </button>
 
           {/* 3. Run AI Review Button with Framer Motion Sage Glow */}

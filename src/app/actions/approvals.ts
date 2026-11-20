@@ -31,7 +31,7 @@ function deriveOriginalText(currentBody: string): string {
 export async function getApprovalQueue(): Promise<ApprovalContentItem[]> {
   const { workspaceId, userEmail } = await requireUserWorkspace();
 
-  let contents = await prisma.content.findMany({
+  const contents = await prisma.content.findMany({
     where: {
       workspaceId,
       status: 'IN_REVIEW',
@@ -43,57 +43,6 @@ export async function getApprovalQueue(): Promise<ApprovalContentItem[]> {
       id: 'desc',
     },
   });
-
-  // Seed default demo pending reviews if the queue is empty
-  if (contents.length === 0) {
-    try {
-      await prisma.content.create({
-        data: {
-          workspaceId,
-          title: 'Q4 Enterprise Cloud Infrastructure Launch Release',
-          bodyText: 'Markwise guarantees 100% unbreakable security with enterprise-grade encryption and audited SOC 2 Type II assurance.',
-          status: 'IN_REVIEW',
-          issues: {
-            create: [
-              {
-                severity: 'HIGH',
-                explanation: 'Absolute guarantee flagged: "100% unbreakable security" violates FTC truth-in-advertising guidelines.',
-                suggestedFix: 'Replace with "multi-layered cryptographic architecture and audited SOC 2 Type II compliance".',
-                status: 'OPEN',
-              },
-            ],
-          },
-        },
-      });
-
-      await prisma.content.create({
-        data: {
-          workspaceId,
-          title: 'Global Performance Benchmark Whitepaper (2026)',
-          bodyText: 'Independent benchmark audits confirm verified uptime and consistent SLA metrics across all cloud regions.',
-          status: 'IN_REVIEW',
-          issues: {
-            create: [],
-          },
-        },
-      });
-
-      contents = await prisma.content.findMany({
-        where: {
-          workspaceId,
-          status: 'IN_REVIEW',
-        },
-        include: {
-          issues: true,
-        },
-        orderBy: {
-          id: 'desc',
-        },
-      });
-    } catch (e) {
-      console.warn('Could not auto-seed pending items:', e);
-    }
-  }
 
   return contents.map((c, index) => {
     const hasHighIssue = c.issues.some((i) => i.severity === 'HIGH');
@@ -149,16 +98,4 @@ export async function approveContent(contentId: string): Promise<void> {
 
 export async function rejectContent(contentId: string): Promise<void> {
   return updateContentStatus(contentId, 'REJECTED');
-}
-
-export async function resetApprovalQueue(): Promise<void> {
-  const { workspaceId } = await requireUserWorkspace();
-
-  // Reset demo contents to IN_REVIEW
-  await prisma.content.updateMany({
-    where: { workspaceId },
-    data: { status: 'IN_REVIEW' },
-  });
-
-  revalidatePath('/dashboard/approvals');
 }

@@ -13,24 +13,14 @@ import {
 } from 'recharts';
 import { useTheme } from 'next-themes';
 
-interface HealthDataPoint {
+export interface HealthDataPoint {
   day: string;
   verified: number;
   flagged: number;
   resolved: number;
 }
 
-const weeklyData: HealthDataPoint[] = [
-  { day: 'Mon', verified: 42, flagged: 8, resolved: 7 },
-  { day: 'Tue', verified: 55, flagged: 11, resolved: 10 },
-  { day: 'Wed', verified: 68, flagged: 6, resolved: 6 },
-  { day: 'Thu', verified: 51, flagged: 14, resolved: 12 },
-  { day: 'Fri', verified: 74, flagged: 9, resolved: 9 },
-  { day: 'Sat', verified: 32, flagged: 4, resolved: 4 },
-  { day: 'Sun', verified: 38, flagged: 3, resolved: 3 },
-];
-
-export function BrandHealthChart() {
+export function BrandHealthChart({ data }: { data?: HealthDataPoint[] }) {
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -46,6 +36,16 @@ export function BrandHealthChart() {
     );
   }
 
+  const chartData = data && data.length > 0 ? data : [
+    { day: 'Mon', verified: 0, flagged: 0, resolved: 0 },
+    { day: 'Tue', verified: 0, flagged: 0, resolved: 0 },
+    { day: 'Wed', verified: 0, flagged: 0, resolved: 0 },
+    { day: 'Thu', verified: 0, flagged: 0, resolved: 0 },
+    { day: 'Fri', verified: 0, flagged: 0, resolved: 0 },
+    { day: 'Sat', verified: 0, flagged: 0, resolved: 0 },
+    { day: 'Sun', verified: 0, flagged: 0, resolved: 0 },
+  ];
+
   const isDark = resolvedTheme === 'dark';
   const textColor = isDark ? '#A3A3A3' : '#545B4E';
   const gridColor = isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.06)';
@@ -57,7 +57,7 @@ export function BrandHealthChart() {
     <div className="w-full h-72">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
-          data={weeklyData}
+          data={chartData}
           margin={{ top: 10, right: 10, left: -20, bottom: 0 }}
           barGap={6}
         >

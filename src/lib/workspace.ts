@@ -1,3 +1,4 @@
+import { redirect } from 'next/navigation';
 import { prisma } from './prisma';
 import { createClient } from '../utils/supabase/server';
 import {
@@ -155,27 +156,17 @@ export async function getOrCreateUserWorkspace(
  * Creates an isolated Workspace on the fly for that user if it doesn't exist.
  */
 export async function requireUserWorkspace(): Promise<UserWorkspaceContext> {
-  try {
-    const supabase = await createClient();
-    const {
-      data: { user },
-      error,
-    } = await supabase.auth.getUser();
+  const supabase = await createClient();
+  const {
+    data: { user },
+    error,
+  } = await supabase.auth.getUser();
 
-    if (!error && user && user.id) {
-      return await getOrCreateUserWorkspace(user.id, user.email);
-    }
-  } catch (err) {
-    console.warn('[Workspace] Supabase session retrieval fallback:', err);
+  if (error || !user || !user.id) {
+    redirect('/login');
   }
 
-  // Graceful fallback to demo workspace for local development / unauthenticated access
-  const demo = await getOrCreateDemoWorkspace();
-  return {
-    userId: DEMO_USER_ID,
-    userEmail: DEMO_USER_EMAIL,
-    workspaceId: demo.id,
-  };
+  return await getOrCreateUserWorkspace(user.id, user.email);
 }
 
 /**
