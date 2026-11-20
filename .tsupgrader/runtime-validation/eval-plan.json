@@ -1,0 +1,61 @@
+{
+  "generatedAt": "2026-11-20T18:59:38.082+05:30",
+  "generatedOnPlatform": "win32",
+  "projectType": "webapp",
+  "setup": [],
+  "assertions": [
+    {
+      "name": "typescript-check",
+      "kind": "process",
+      "command": "npm",
+      "args": [
+        "run",
+        "lint"
+      ],
+      "verificationMethod": "exit-code",
+      "expected": "0",
+      "timeoutSeconds": 120
+    },
+    {
+      "name": "tests-pass",
+      "kind": "process",
+      "command": "npm",
+      "args": [
+        "test"
+      ],
+      "verificationMethod": "test-results",
+      "expected": "0",
+      "timeoutSeconds": 300
+    },
+    {
+      "name": "production-build",
+      "kind": "process",
+      "command": "npm",
+      "args": [
+        "run",
+        "build"
+      ],
+      "verificationMethod": "exit-code",
+      "expected": "0",
+      "timeoutSeconds": 300
+    },
+    {
+      "name": "production-home-200",
+      "kind": "http-probe",
+      "startCommand": "npm",
+      "startArgs": [
+        "run",
+        "start",
+        "--",
+        "--port",
+        "3100",
+        "--hostname",
+        "127.0.0.1"
+      ],
+      "url": "http://127.0.0.1:3100/",
+      "verificationMethod": "http-status",
+      "expected": "200",
+      "timeoutSeconds": 120
+    }
+  ]
+}

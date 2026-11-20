@@ -1,0 +1,126 @@
+{
+  "planHash": "98ea8a9958f0dfc758c95a6fcad3520a43fc2dd47519e1bedb1e214ef88e9f4d",
+  "phase": "standalone",
+  "recordedAtUtc": "2026-11-20T13:42:39.9277319Z",
+  "retryCount": 0,
+  "resetBaseline": false,
+  "complete": true,
+  "result": {
+    "setupSucceeded": true,
+    "setupDurationMs": 0,
+    "setupFailureOutput": null,
+    "assertions": [
+      {
+        "name": "typescript-check",
+        "kind": "process",
+        "verificationMethod": "exit-code",
+        "passed": true,
+        "timedOut": false,
+        "skipped": false,
+        "skippedReason": null,
+        "exitCode": 0,
+        "outputSample": "\r\n\u003E markwise-governance-platform@1.0.0 lint\r\n\u003E tsc --noEmit\r\n\r\n",
+        "durationMs": 11053
+      },
+      {
+        "name": "tests-pass",
+        "kind": "process",
+        "verificationMethod": "test-results",
+        "passed": true,
+        "timedOut": false,
+        "skipped": false,
+        "skippedReason": null,
+        "exitCode": 0,
+        "outputSample": "\r\n\u003E markwise-governance-platform@1.0.0 test\r\n\u003E tsx --test src/utils/dashboard.test.ts src/utils/governance.test.ts\r\n\r\nTAP version 13\r\n# Subtest: isValidDashboardPage validates all 5 core dashboard routes\r\nok 1 - isValidDashboardPage validates all 5 core dashboard routes\r\n  ---\r\n  duration_ms: 1.7135\r\n  type: \u0027test\u0027\r\n  ...\r\n# Subtest: NAV_ITEMS contains all 5 required links with proper metadata\r\nok 2 - NAV_ITEMS contains all 5 required links with proper metadata\r\n  ---\r\n  duration_ms: 1.3716\r\n  type: \u0027test\u0027\r\n  ...\r\n# Subtest: getPageMetadata returns valid config\r\nok 3 - getPageMetadata returns valid config\r\n  ---\r\n  duration_ms: 0.2876\r\n  type: \u0027test\u0027\r\n  ...\r\n# Subtest: calculateApprovalStats summarizes queue state correctly\r\nok 4 - calculateApprovalStats summarizes queue state correctly\r\n  ---\r\n  duration_ms: 0.7043\r\n  type: \u0027test\u0027\r\n  ...\r\n# Subtest: filterEvidenceBySearch matches by title or anchor\r\nok 5 - filterEvidenceBySearch matches by title or anchor\r\n  ---\r\n  duration_ms: 0.5236\r\n  type: \u0027test\u0027\r\n  ...\r\n# Subtest: getSeverityBorderClass returns correct color for HIGH, MEDIUM, LOW\r\nok 6 - getSeverityBorderClass returns correct color for HIGH, MEDIUM, LOW\r\n  ---\r\n  duration_ms: 0.4767\r\n  type: \u0027test\u0027\r\n  ...\r\n# Subtest: INITIAL_MOCK_ISSUES contains 2 mock cards with required keys and severity badges\r\nok 7 - INITIAL_MOCK_ISSUES contains 2 mock cards with required keys and severity badges\r\n  ---\r\n  duration_ms: 0.288\r\n  type: \u0027test\u0027\r\n  ...\r\n# Subtest: isValidTab checks allowed navigation tabs\r\nok 8 - isValidTab checks allowed navigation tabs\r\n  ---\r\n  duration_ms: 1.6239\r\n  type: \u0027test\u0027\r\n  ...\r\n# Subtest: getStepCategory returns forest green tokens for AI and coral for Human\r\nok 9 - getStepCategory returns forest green tokens for AI and coral for Human\r\n  ---\r\n  duration_ms: 3.1398\r\n  type: \u0027test\u0027\r\n  ...\r\n# Subtest: calculatePlanPrice handles monthly vs annual discount correctly\r\nok 10 - calculatePlanPrice handles monthly vs annual discount correctly\r\n  ---\r\n  duration_ms: 0.6903\r\n  type: \u0027test\u0027\r\n  ...\r\n# Subtest: filterSteps filters steps by actor correctly\r\nok 11 - filterSteps filters steps by actor correctly\r\n  ---\r\n  duration_ms: 0.821\r\n  type: \u0027test\u0027\r\n  ...\r\n# Subtest: calculateComplianceScore scales dynamically\r\nok 12 - calculateComplianceScore scales dynamically\r\n  ---\r\n  duration_ms: 0.6342\r\n  type: \u0027test\u0027\r\n  ...\r\n# Subtest: formatRuleVersion formats major and minor correctly\r\nok 13 - formatRuleVersion formats major and minor correctly\r\n  ---\r\n  duration_ms: 0.5442\r\n  type: \u0027test\u0027\r\n  ...\r\n1..13\r\n# tests 13\r\n# suites 0\r\n# pass 13\r\n# fail 0\r\n# cancelled 0\r\n# skipped 0\r\n# todo 0\r\n# duration_ms 755.8596\r\n",
+        "durationMs": 3233,
+        "testResults": {
+          "testFramework": "unknown",
+          "runnerDetectedFrom": "none",
+          "testsTotal": 0,
+          "testsPassed": 0,
+          "testsFailed": 0,
+          "testsSkipped": 0,
+          "parseFailed": true
+        }
+      },
+      {
+        "name": "production-build",
+        "kind": "process",
+        "verificationMethod": "exit-code",
+        "passed": true,
+        "timedOut": false,
+        "skipped": false,
+        "skippedReason": null,
+        "exitCode": 0,
+        "outputSample": "\r\n\u003E markwise-governance-platform@1.0.0 build\r\n\u003E prisma generate \u0026\u0026 next build\r\n\r\nEnvironment variables loaded from .env\r\nPrisma schema loaded from prisma\\schema.prisma\r\n\r\n\u2714 Generated Prisma Client (v6.19.3) to .\\node_modules\\@prisma\\client in 328ms\r\n\r\nStart by importing your Prisma Client (See: https://pris.ly/d/importing-client)\r\n\r\nTip: Need your database queries to be 1000x faster? Accelerate offers you that and more: https://pris.ly/tip-2-accelerate\r\n\r\n  \u25B2 Next.js 14.2.5\r\n  - Environments: .env.local, .env\r\n\r\n   Creating an optimized production build ...\r\n \u2713 Compiled successfully\r\n   Linting and checking validity of types ...\r\n   Collecting page data ...\r\n   Generating static pages (0/16) ...\r\n   Generating static pages (4/16) \r\n   Generating static pages (8/16) \r\n   Generating static pages (12/16) \r\n \u2713 Generating static pages (16/16)\r\n   Finalizing page optimization ...\r\n   Collecting build traces ...\r\n\r\nRoute (app)                              Size     First Load JS\r\n\u250C \u25CB /                                    17.7 kB         112 kB\r\n\u251C \u25CB /_not-found                          141 B          87.3 kB\r\n\u251C \u0192 /api/rules                           0 B                0 B\r\n\u251C \u0192 /dashboard                           4.59 kB         147 kB\r\n\u251C \u0192 /dashboard/approvals                 4.15 kB         149 kB\r\n\u251C \u0192 /dashboard/facts                     3.9 kB          141 kB\r\n\u251C \u0192 /dashboard/review                    5 kB            142 kB\r\n\u251C \u0192 /dashboard/rules                     5.54 kB         143 kB\r\n\u251C \u0192 /dashboard/settings                  2.87 kB         138 kB\r\n\u251C \u25CB /docs                                3.34 kB          98 kB\r\n\u251C \u25CB /how-it-works                        10.4 kB         105 kB\r\n\u251C \u25CB /login                               73.5 kB         161 kB\r\n\u251C \u25CB /privacy                             3.45 kB        90.6 kB\r\n\u251C \u25CB /terms                               2.97 kB        90.2 kB\r\n\u2514 \u25CB /trust                               5.98 kB         101 kB\r\n\u002B First Load JS shared by all            87.2 kB\r\n  \u251C chunks/23-307044184c01fd39.js        31.5 kB\r\n  \u251C chunks/fd9d1056-6ed954dac8415982.js  53.6 kB\r\n  \u2514 other shared chunks (total)          2.02 kB\r\n\r\n\r\n\u0192 Middleware                             87.6 kB\r\n\r\n\u25CB  (Static)   prerendered as static content\r\n\u0192  (Dynamic)  server-rendered on demand\r\n\r\n",
+        "durationMs": 96581
+      },
+      {
+        "name": "production-home-200",
+        "kind": "http-probe",
+        "verificationMethod": "http-status",
+        "passed": true,
+        "timedOut": false,
+        "skipped": false,
+        "skippedReason": null,
+        "exitCode": null,
+        "outputSample": "HTTP 200\n\u003C!DOCTYPE html\u003E\u003Chtml lang=\u0022en\u0022\u003E\u003Chead\u003E\u003Cmeta charSet=\u0022utf-8\u0022/\u003E\u003Cmeta name=\u0022viewport\u0022 content=\u0022width=device-width, initial-scale=1\u0022/\u003E\u003Clink rel=\u0022stylesheet\u0022 href=\u0022/_next/static/css/1e243a1aeecaed10.css\u0022 data-precedence=\u0022next\u0022/\u003E\u003Clink rel=\u0022preload\u0022 as=\u0022script\u0022 fetchPriority=\u0022low\u0022 href=\u0022/_next/static/chunks/webpack-57ed300fc42efa72.js\u0022/\u003E\u003Cscript src=\u0022/_next/static/chunks/fd9d1056-6ed954dac8415982.js\u0022 async=\u0022\u0022\u003E\u003C/script\u003E\u003Cscript src=\u0022/_next/static/chunks/23-307044184c01fd39.js\u0022 async=\u0022\u0022\u003E\u003C/script\u003E\u003Cscript src=\u0022/_next/static/chunks/main-app-39bedbc92df096a8.js\u0022 async=\u0022\u0022\u003E\u003C/script\u003E\u003Cscript src=\u0022/_next/static/chunks/48-271c79cf0d4ec756.js\u0022 async=\u0022\u0022\u003E\u003C/script\u003E\u003Cscript src=\u0022/_next/static/chunks/515-d2ad3b5d6de13037.js\u0022 async=\u0022\u0022\u003E\u003C/script\u003E\u003Cscript src=\u0022/_next/static/chunks/app/page-fb1bbc1d9ce6cc04.js\u0022 async=\u0022\u0022\u003E\u003C/script\u003E\u003Cscript src=\u0022/_next/static/chunks/app/layout-5ecb44469a9f790a.js\u0022 async=\u0022\u0022\u003E\u003C/script\u003E\u003Cscript src=\u0022/_next/static/chunks/app/error-1faccb5f8310a3a6.js\u0022 async=\u0022\u0022\u003E\u003C/script\u003E\u003Cscript src=\u0022/_next/static/chunks/app/not-found-b90b36ee62ed2020.js\u0022 async=\u0022\u0022\u003E\u003C/script\u003E\u003Cscript src=\u0022/_next/static/chunks/app/global-error-c5defa9f3bc12622.js\u0022 async=\u0022\u0022\u003E\u003C/script\u003E\u003Ctitle\u003EMarkwise | Enterprise Brand Governance\u003C/title\u003E\u003Cmeta name=\u0022description\u0022 content=\u0022Review marketing and corporate copy against your brand rules and approved evidence. Get clear explanations, suggested edits, and a traceable approval history.\u0022/\u003E\u003Cmeta name=\u0022robots\u0022 content=\u0022index, follow\u0022/\u003E\u003Cmeta property=\u0022og:title\u0022 content=\u0022Markwise | Enterprise Brand Governance\u0022/\u003E\u003Cmeta property=\u0022og:description\u0022 content=\u0022Deterministic pre-publish review, causal explainability, and cryptographic brand audit trails for enterprise legal and marketing teams.\u0022/\u003E\u003Cmeta property=\u0022og:url\u0022 content=\u0022https://markwise.ai\u0022/\u003E\u003Cmeta property=\u0022og:site_name\u0022 content=\u0022Markwise\u0022/\u003E\u003Cmeta property=\u0022og:locale\u0022 content=\u0022en_US\u0022/\u003E\u003Cmeta property=\u0022og:image\u0022 content=\u0022https://markwise.ai/og-image.png\u0022/\u003E\u003Cmeta property=\u0022og:image:width\u0022 content=\u00221200\u0022/\u003E\u003Cmeta property=\u0022og:image:height\u0022 content=\u0022630\u0022/\u003E\u003Cmeta property=\u0022og:image:alt\u0022 content=\u0022Markwise Enterprise AI Brand Governance Platform\u0022/\u003E\u003Cmeta property=\u0022og:type\u0022 content=\u0022website\u0022/\u003E\u003Cmeta name=\u0022twitter:card\u0022 content=\u0022summary_large_image\u0022/\u003E\u003Cmeta name=\u0022twitter:creator\u0022 content=\u0022@markwise\u0022/\u003E\u003Cmeta name=\u0022twitter:title\u0022 content=\u0022Markwise | Enterprise Brand Governance\u0022/\u003E\u003Cmeta name=\u0022twitter:description\u0022 content=\u0022Review marketing copy against brand rules and approved evidence with causal explainability.\u0022/\u003E\u003Cmeta name=\u0022twitter:image\u0022 content=\u0022https://markwise.ai/og-image.png\u0022/\u003E\u003Cscript src=\u0022/_next/static/chunks/polyfills-78c92fac7aa8fdd8.js\u0022 noModule=\u0022\u0022\u003E\u003C/script\u003E\u003C/head\u003E\u003Cbody class=\u0022antialiased selection:bg-[#F47745]/20 selection:text-[#174C3B]\u0022\u003E\u003Ca href=\u0022#main-content\u0022 class=\u0022sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2.5 focus:bg-[#F47745] focus:text-white focus:font-semibold focus:text-sm focus:rounded-lg focus:shadow-xl focus:ring-2 focus:ring-[#123B2F] focus:outline-none transition-all\u0022\u003ESkip to main content\u003C/a\u003E\u003Cscript\u003E((e,t,r,n,l,o,a,u)=\u003E{let i=document.documentElement,c=[\u0022light\u0022,\u0022dark\u0022];function d(t){(Array.isArray(e)?e:[e]).forEach(e=\u003E{let r=\u0022class\u0022===e,n=r\u0026\u0026o?l.map(e=\u003Eo[e]||e):l;r?(i.classList.remove(...n),i.classList.add(o\u0026\u0026o[t]?o[t]:t)):i.setAttribute(e,t)}),u\u0026\u0026c.includes(t)\u0026\u0026(i.style.colorScheme=t)}if(n)d(n);else try{let e=localStorage.getItem(t)||r,n=a\u0026\u0026\u0022system\u0022===e?window.matchMedia(\u0022(prefers-color-scheme: dark)\u0022).matches?\u0022dark\u0022:\u0022light\u0022:e;d(n)}catch(e){}})(\u0022class\u0022,\u0022theme\u0022,\u0022light\u0022,null,[\u0022light\u0022,\u0022dark\u0022],null,false,true)\u003C/script\u003E\u003C!--$--\u003E\u003Cdiv class=\u0022bg-brand-ivory dark:bg-brand-forest min-h-screen text-brand-ink dark:text-brand-ivory selection:bg-brand-coral/20 selection:text-brand-forest-light overflow-x-hidden font-inter transition-colors duration-300\u0022\u003E\u003Cheader class=\u0022w-full bg-[#F7F2E8]/90 dark:bg-[#123B2F]/90 backdrop-blur-md sticky top-0 z-50 transition-all border-b border-[#E8DFD0]/60 dark:border-[#235A4A]/60\u0022\u003E\u003Cdiv class=\u0022max-w-7xl mx-auto px-4 sm:px-6 py-2.5 sm:py-3\u0022\u003E\u003Cdiv class=\u0022bg-[#FAF7F0]/90 dark:bg-[#164638]/90 rounded-full border\n\u2026[truncated]",
+        "durationMs": 3038
+      }
+    ],
+    "executions": [
+      {
+        "source": "typescript-check",
+        "resolvedExecutable": "C:\\Program Files\\nodejs\\npm.CMD",
+        "args": [
+          "run",
+          "lint"
+        ],
+        "cwd": "C:\\Users\\DELL\\OneDrive\\Desktop\\markwise\\markwise",
+        "env": {},
+        "prependPath": [],
+        "platform": "win32"
+      },
+      {
+        "source": "tests-pass",
+        "resolvedExecutable": "C:\\Program Files\\nodejs\\npm.CMD",
+        "args": [
+          "test"
+        ],
+        "cwd": "C:\\Users\\DELL\\OneDrive\\Desktop\\markwise\\markwise",
+        "env": {},
+        "prependPath": [],
+        "platform": "win32"
+      },
+      {
+        "source": "production-build",
+        "resolvedExecutable": "C:\\Program Files\\nodejs\\npm.CMD",
+        "args": [
+          "run",
+          "build"
+        ],
+        "cwd": "C:\\Users\\DELL\\OneDrive\\Desktop\\markwise\\markwise",
+        "env": {},
+        "prependPath": [],
+        "platform": "win32"
+      },
+      {
+        "source": "production-home-200",
+        "resolvedExecutable": "C:\\Program Files\\nodejs\\npm.CMD",
+        "args": [
+          "run",
+          "start",
+          "--",
+          "--port",
+          "3100",
+          "--hostname",
+          "127.0.0.1"
+        ],
+        "cwd": "C:\\Users\\DELL\\OneDrive\\Desktop\\markwise\\markwise",
+        "env": {},
+        "prependPath": [],
+        "platform": "win32"
+      }
+    ]
+  }
+}

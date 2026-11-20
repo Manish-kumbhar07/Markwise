@@ -15,7 +15,8 @@
     "build": "prisma generate && next build",
     "start": "next start",
     "clean": "rm -rf dist server.js .next",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "test": "tsx --test src/utils/dashboard.test.ts src/utils/governance.test.ts"
   },
   "dependencies": {
     "@google/genai": "^2.32.0",
